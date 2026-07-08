@@ -25,8 +25,8 @@ dependencies:
 
   # Médias / fichiers
   image_picker: ^1.0.7
-  file_picker: ^6.1.1
-  share_plus: ^7.2.1
+  file_picker: ^8.1.2
+  share_plus: ^10.1.2
 
   # Utilitaires
   intl: ^0.19.0
