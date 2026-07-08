@@ -1,0 +1,22 @@
+workflows:
+  android-workflow:
+    name: Lebonprix 237 - Build Android
+    max_build_duration: 30
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Régénérer le dossier android/ (manquant dans le dépôt)
+        script: |
+          flutter create --platforms=android --org com.eliteempire .
+      - name: Installer les dépendances
+        script: |
+          flutter pub get
+      - name: Compiler l'APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
+    publishing:
+      email:
+        recipients: []
