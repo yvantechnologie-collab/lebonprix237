@@ -9,6 +9,22 @@ workflows:
       - name: Régénérer le dossier android/ (manquant dans le dépôt)
         script: |
           flutter create --platforms=android --org com.eliteempire .
+      - name: Corriger le compileSdk pour tous les plugins (fix AAR metadata)
+        script: |
+          if [ -f android/build.gradle ]; then
+            cat >> android/build.gradle << 'EOF'
+
+subprojects {
+    afterEvaluate { proj ->
+        if (proj.hasProperty('android')) {
+            proj.android {
+                compileSdkVersion 36
+            }
+        }
+    }
+}
+EOF
+          fi
       - name: Installer les dépendances
         script: |
           flutter pub get
